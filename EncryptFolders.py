@@ -16,12 +16,12 @@ class AESEncryptFolders:
     After encrypting it, the zip will be deleted and the password returned so you 
     can write it down somewhere safe.
     """
-    def __init__(self, KEY_SIZE, PATH_TO_FOLDERS, PATH_TO_DEST, FOLDERS_WITH, INTER = 20000):
+    def __init__(self, KEY_SIZE ,PATH_TO_FOLDERS, PATH_TO_DEST, FOLDERS_WITH, PASSWORD = None, INTER = 20000):
         self.key_size = KEY_SIZE
         self.path_to_folders = PATH_TO_FOLDERS
         self.path_to_dest = PATH_TO_DEST
         self.folders_with = FOLDERS_WITH
-        self.password = self.random_password_string().replace("'",'*')
+        self.password = PASSWORD if PASSWORD else self.random_password_string().replace("'",'*')
         self.inter = INTER
 
     def random_password_string(self):

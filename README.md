@@ -29,6 +29,8 @@ KEY_SIZE = 32
 PATH_TO_FOLDERS = '/Users/username/Documents/testing/input/'
 FOLDERS_WITH = '(D_ENC)' # will search for this in the folders name
 ENC_PATH = '/Users/username/Documents/testing/output/' # you can change if you want
+# PASSWORD = "123" # you can add any password that you want and pass it to the object
+
 
 test = AESEncryptFolders(KEY_SIZE, PATH_TO_FOLDERS, ENC_PATH, FOLDERS_WITH)
 password = test.encrypt()
