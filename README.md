@@ -49,6 +49,12 @@ Folders to be decrypted: ['(ENC) folder2.enc', '(ENC) folder.enc']
         Folder /Users/username/Documents/testing/input/(ENC) folder.enc decrypted
 ```
 
+:exclamation: **Important**: You can either let the program generate a random password for you with the size of `KEY_SIZE` or you can pass your own password to the PASSWORD variable and add it to the object.
+
+```python
+AESEncryptFolders(KEY_SIZE, PATH_TO_FOLDERS, ENC_PATH, FOLDERS_WITH, PASSWORD)
+```
+
 # OS
 This library was tested in a OSX 10.15 and i strongly believe that it will work with linux. 
 It will probably crash in Windows due to the ecape_characters function, thought is easy to fix this.

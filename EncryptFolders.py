@@ -37,20 +37,26 @@ class AESEncryptFolders:
         """
         Escape characters so we can use them as paths 
         """
-        return name.replace('(','\(').replace(')','\)').replace(' ','\ ')
+        return name.replace('(','\(').replace(')','\)').replace(' ','\ ').replace('[','\[').replace(']','\]')
 
     @staticmethod
     def subprocess_shell_command(cmd, path=None):
         """
         Used to run shell comands 
         """
-        sp = subprocess.Popen(cmd,
+        
+        try:
+            sp = subprocess.Popen(cmd,
                 cwd=path,
                 shell=True,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE)
-        rc=sp.wait()
-        out,err=sp.communicate()
+            rc=sp.wait()
+            out,err=sp.communicate()
+        except FileNotFoundError as e:
+            print('Comand: ',cmd)
+            print('Path: ',path)
+            raise FileNotFoundError(e)
 
         if err:
             print('ERROR: A problem ocurred when using subprocess')
@@ -67,7 +73,8 @@ class AESEncryptFolders:
         if not(destination_path):
             destination_path = folder_path
 
-        folder_path = self.ecape_characters(folder_path)
+        # folder path doesnt need to escape
+        # folder_path = self.ecape_characters(folder_path)
         folder_name = self.ecape_characters(folders_name)
         destination_path = self.ecape_characters(destination_path)
 
@@ -135,3 +142,4 @@ class AESEncryptFolders:
         
             if not(err):
                 print("\tFolder {} decrypted".format(self.path_to_folders + folder))
+                remove(join(self.path_to_dest, folder))
